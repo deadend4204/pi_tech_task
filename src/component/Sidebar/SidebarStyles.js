@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton";
 import { MenuItem as BaseMenuItem } from "@mui/base/MenuItem";
 
-const drawerWidth = 180;
+const drawerWidth = 240;
 const openedMixin = (theme) => ({
   backgroundColor: "#052E2B",
   width: drawerWidth,
@@ -108,33 +108,10 @@ const Homebtn = styled("div")(() => ({
 
   "&:hover": {
     background: "#00704B",
-    padding: "4px 10px 4px 10px",
+    padding: "4px 16px 4px 16px",
   },
 }));
 
-const TopIcons = styled("div")(() => ({
-  color: "black",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-}));
-const Listbox = styled("ul")(
-  ({ theme }) => `
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.875rem;
-    
-      margin: 12px 0;
-      width : 129.22px
-      border-radius: 12px;
-      overflow: auto;
-      outline: 0px;
-      background: #fff;
-      border : 0;
-      color: black;
-     height : 24px
-      z-index: 1;
-      `
-);
 
 const MenuItem = styled(BaseMenuItem)(
   ({ theme }) => `
@@ -177,9 +154,9 @@ export {
   DrawerHeader,
   AppBar,
   Homebtn,
-  TopIcons,
+  // TopIcons,
   Procurement,
-  Listbox,
+  // Listbox,
   MenuItem,
   MenuButton,
 };

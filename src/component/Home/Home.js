@@ -1,156 +1,124 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
 import {
-  Header,
-  Icon,
-  PO,
+  CustomIconButton,
   Responsibility,
   Search,
+  StepperButton,
   Text,
-  Code,
-  Company,
-  Label,
-  Clean,
-  Order,
+  TextFieldsContainer,
 } from "./HomeStyle";
 import IconButton from "@mui/material/IconButton";
-import BalconyIcon from "@mui/icons-material/Balcony";
+import DeleteIcon from "@mui/icons-material/Close";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SearchIcon from "@mui/icons-material/Search";
-import TuneIcon from "@mui/icons-material/Tune";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Badge from "@mui/material/Badge";
-import TextField from "@mui/material/TextField";
-import LabelInput from "./LabelInput";
-import Orders from "./Orders";
-import OrderDetails from "./OrderDetails";
-export default function BasicGrid() {
+import StepperSteps from "../../commonComponents/Stepper";
+import CustomTextField from "../../commonComponents/TextField";
+import CustomizedAccordions from "../../commonComponents/Accordion";
+import ArrowRightIcon from '@mui/icons-material/ArrowForward';
+import ArrowLeftIcon from '@mui/icons-material/ArrowBack';
+
+export default function Home() {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = [
+    "ADD ORDER BASKET",
+    "ORDER DETAILS",
+    "DELIVERY DETAILS",
+    "SUMMARY",
+  ];
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
+      <Grid container>
+        <Grid item xs={12}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "0 20px",
+              alignItems: "center",
+            }}
+          >
+            <div>Create Requisition - Spares</div>
+            <IconButton aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        </Grid>
+      </Grid>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} lg={5} xl={3} md={6}>
-          <Responsibility>
-            <Header>
+        <Grid item xs={12} xl={12}>
+          <StepperSteps activeStep={activeStep} steps={steps} />
+        </Grid>
+      </Grid>
+
+      <Grid container justifyContent={"center"} spacing={2}>
+        <Grid item xs={12} xl={12}>
+          <div style={{ padding: "0 20px" }}>
+            <Responsibility>
+              <TextFieldsContainer>
+                <CustomTextField
+                  label="Component*"
+                  defaultValue={"Main Engine"}
+                  endAdornmentIcon={<SearchIcon />}
+                />
+                <CustomTextField
+                  label="Part Name"
+                  defaultValue={"Enter part name"}
+                />
+                <CustomTextField
+                  label="Marker's Ref No."
+                  defaultValue={"Marker's ref no"}
+                />
+              </TextFieldsContainer>
               <Search>
+                <Text>SEARCH</Text>
                 <IconButton>
-                  <BalconyIcon sx={{ width: "15.8px", height: "16px" }} />
-                </IconButton>
-                <Text>My Responsibilities</Text>
-                <IconButton>
-                  <SearchIcon sx={{ width: "15.8px", height: "16px" }} />
+                  <SearchIcon />
                 </IconButton>
               </Search>
-              <PO>
-                <IconButton>
-                  <Text>PO</Text>
-                </IconButton>
-                <IconButton>
-                  <KeyboardArrowDownIcon
-                    sx={{ width: "15.8px", height: "16px" }}
-                  />
-                </IconButton>
-              </PO>
-              <Icon>
-                <IconButton>
-                  <Badge badgeContent={4} color="success">
-                    <TuneIcon sx={{ color: "#68DA6A" }} />
-                  </Badge>
-                </IconButton>
-              </Icon>
-            </Header>
-            <Code>
-              <TextField
-                fullWidth
-                id="filled-number"
-                label="Coy id"
-                inputProps={{
-                  style: { fontSize: 13, backgroundColor: "#F2EEEB" },
-                }}
-                defaultValue="Enter coy id"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="filled"
-              />
-              <TextField
-                fullWidth
-                sx={{ marginLeft: "24px" }}
-                id="filled-number"
-                label="Order no"
-                inputProps={{
-                  style: { fontSize: 13, backgroundColor: "#F2EEEB" },
-                }}
-                defaultValue="Enter order id"
-                InputLabelProps={{
-                  shrink: true,
-                  fontSize: "18px",
-                }}
-                variant="filled"
-              />
-            </Code>
-            <Label>
-              <Clean>
-                <LabelInput
-                  icon
-                  text={"Sort"}
-                  color={"#020A08"}
-                  fontSize={"13px"}
-                  textDecoration={"underline"}
-                  margin={"0px 16px 0px 0px"}
-                />
-                <LabelInput
-                  icon
-                  text={"Group By"}
-                  color={"#020A08"}
-                  fontSize={"13px"}
-                  textDecoration={"underline"}
-                />
-              </Clean>
-              <Clean>
-                <LabelInput
-                  text={"Clean"}
-                  color={"#020A08"}
-                  fontSize={"13px"}
-                  textDecoration={"underline"}
-                  margin={"0px 16px 0px 0px"}
-                />
-                <LabelInput
-                  text={"Search"}
-                  color={"#020A08"}
-                  fontSize={"13px"}
-                  textDecoration={"underline"}
-                />
-              </Clean>
-            </Label>
-          </Responsibility>
-          <Order>
-            <LabelInput
-              text={"Order"}
-              fontWeight={"500"}
-              padding={"0px 10px 0px 0px"}
-            />
-            <IconButton
-              sx={{
-                backgroundColor: "#D9D1C6",
-                width: "24px",
-                height: "18px",
-                fontSize: "11px",
-                fontWeight: "600",
-                padding: "5px 8px 5px 8px",
-              }}
+            </Responsibility>
+            <div
+              style={{ display: "flex", justifyContent: "end", width: "100%" }}
             >
-              8
-            </IconButton>
-          </Order>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Orders key={index} />
-          ))}
-        </Grid>
-        <Grid item xs={12} sm={12} lg={7} xl={9} md={12}>
-          <Company>
-            <OrderDetails />
-          </Company>
+              <CustomIconButton
+                variant="text"
+                startIcon={<AddCircleOutlineIcon />}
+              >
+                Add To Order Basket
+              </CustomIconButton>
+            </div>
+            <CustomizedAccordions />
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2,mb:2 }}>
+              {activeStep !== 0 && (
+                    <StepperButton
+                    variant="text"
+                    onClick={handleBack}
+                    startIcon={<ArrowLeftIcon />}
+                  >
+                   Back
+                  </StepperButton>
+              )}
+              <Box sx={{ flex: "1 1 auto" }} />
+              {activeStep !== steps.length && (
+                // <Button onClick={handleNext}>Next</Button>
+                <StepperButton
+                variant="text"
+                onClick={handleNext}
+                endIcon={<ArrowRightIcon />}
+              >
+               Next
+              </StepperButton>
+              )}
+            </Box>
+          </div>
         </Grid>
       </Grid>
     </Box>
