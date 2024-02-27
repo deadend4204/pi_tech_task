@@ -13,4 +13,5 @@ export const RightSideContainer = styled("div")(() => ({
   width: "30%",
   padding: "10px 30px",
   background: "#E8ECED",
+  height: "100vh",
 }));
